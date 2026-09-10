@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'database/db_helper.dart';
-import 'screens/home_screen.dart';
+import 'screens/splash_screen.dart';
 import 'theme/tiranga_theme.dart';
 
 void main() async {
@@ -36,7 +36,7 @@ class CityRailsApp extends StatelessWidget {
       title: 'CityRails - Mumbai Local Train & Transit',
       debugShowCheckedModeBanner: false,
       theme: TirangaTheme.darkTirangaTheme,
-      home: const HomeScreen(),
+      home: const SplashScreen(),
     );
   }
 }
