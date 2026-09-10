@@ -9,7 +9,7 @@ on:
 
 jobs:
   build-ios:
-    name: Build iOS IPA
+    name: Build iOS IPA File
     runs-on: macos-latest
 
     steps:
@@ -25,14 +25,20 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Build iOS IPA (Unsigned / No-Codesign)
+      - name: Build iOS App Archive
         run: flutter build ipa --no-codesign
 
-      - name: Upload iOS Build Artifact
+      - name: Package Runner.app into CityRails.ipa File
+        run: |
+          mkdir -p Payload
+          cp -r build/ios/archive/Runner.xcarchive/Products/Applications/Runner.app Payload/
+          zip -r CityRails.ipa Payload
+
+      - name: Upload CityRails.ipa File
         uses: actions/upload-artifact@v4
         with:
           name: CityRails-iOS-IPA
-          path: build/ios/archive/Runner.xcarchive
+          path: CityRails.ipa
 
   build-android:
     name: Build Android AAB & APK
